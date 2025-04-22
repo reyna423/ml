@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 # load the data from csv file to Pandas DataFrame
-titanic_data = pd.read_csv('/content/train.csv')
+titanic_data = pd.read_csv('train.csv')
 # printing the first 5 rows of the dataframe
 titanic_data.head()
 
