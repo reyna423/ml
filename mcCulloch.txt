@@ -1,0 +1,24 @@
+import numpy as np
+
+# Input data for logical AND gate
+x1 = np.array([0, 0, 1, 1])
+x2 = np.array([0, 1, 0, 1])
+y = np.array([0, 0, 0, 1])  # Expected output for AND
+
+# Taking user input for weights and threshold
+w1 = int(input('Enter the weight (w1) = '))
+w2 = int(input('Enter the weight (w2) = '))
+theta = int(input('Enter the threshold (theta) = '))
+
+# Compute the perceptron output
+f = x1 * w1 + x2 * w2
+y_predict = (f >= theta).astype(int)
+
+# Check if predicted output matches actual output
+if np.all(y == y_predict):
+    print('\nCorrect weights and threshold')
+    print('w1 =', w1)
+    print('w2 =', w2)
+    print('threshold =', theta)
+else:
+    print('\nChange the weights/threshold')

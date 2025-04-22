@@ -1,0 +1,70 @@
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+from sklearn import metrics
+HouseDF = pd.read_csv('USA_Housing.csv')
+HouseDF.head()
+
+
+
+HouseDF.info()
+
+
+HouseDF.describe()
+
+
+HouseDF.columns
+
+
+sns.pairplot(HouseDF)
+
+
+#sns.heatmap(HouseDF.corr(), annot=True)
+# Select only numerical features for correlation calculation
+numerical_features = HouseDF.select_dtypes(include=np.number)
+# Calculate and plot the correlation matrix
+sns.heatmap(numerical_features.corr(), annot=True)
+
+
+X = HouseDF[['Avg. Area Income', 'Avg. Area House Age', 'Avg. Area Number of Rooms',
+'Avg. Area Number of Bedrooms', 'Area Population']]
+y = HouseDF['Price']
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, random_state=101)
+y_train
+
+
+from sklearn.linear_model import LinearRegression
+lm = LinearRegression()
+lm.fit(X_train,y_train)
+
+
+print(lm.intercept_)
+
+
+coeff_df = pd.DataFrame(lm.coef_,X.columns,columns=['Coefficient'])
+coeff_df
+
+
+predictions = lm.predict(X_test)
+
+
+# After creating the scatter plot
+plt.scatter(y_test, predictions)
+
+# Generate regression line
+# Create a range of x values for the line
+x_range = np.linspace(y_test.min(), y_test.max(), 100)  # 100 points for the line
+# Predict y values using the model
+y_range = lm.predict(X_test.loc[y_test.sort_index().index[:100]])
+# Plot the regression line
+plt.plot(x_range, y_range, color='red', linewidth=2)  # Red line for better visibility
+
+plt.xlabel("Actual Values (y_test)")
+plt.ylabel("Predicted Values (predictions)")
+plt.title("Linear Regression: Actual vs. Predicted")
+
+plt.show()
+
+

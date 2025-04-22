@@ -1,0 +1,102 @@
+import numpy as np
+# Create a feature matrix (X) and target vector (y)
+X = np.array([[1, 2], [3, 4], [5, 6]])
+y = np.array([1, 2, 3])
+# Calculate the mean of each feature
+mean = np.mean(y, axis=0)
+print("Mean of features:", mean)
+
+import pandas as pd
+# Create a DataFrame with missing values
+data = {
+'Country': ['Brazil', 'Russia', 'India', None],
+'Population': [200.4, 143.5, None, 52.98]
+}
+df = pd.DataFrame(data)
+# Fill missing values
+df['Population'].fillna(df['Population'].mean(), inplace=True)
+print(df)
+
+# importing tensorflow
+import tensorflow as tf
+# creating nodes in computation graph
+node1 = tf.constant(3, dtype=tf.int32)
+node2 = tf.constant(5, dtype=tf.int32)
+node3 = tf.add(node1, node2)
+# create tensorflow session object
+#sess = tf.compat.v1.Session()
+# evaluating node3 and printing the result
+print("sum of node1 and node2 is :",node3)
+# closing the session
+#sess.close()
+
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()  # Disable v2 behavior when using v1
+
+# Define the graph
+graph = tf.Graph()
+
+# Define operations within the graph context
+with graph.as_default():
+    variable = tf.Variable(42, name='foo')
+    initialize = tf.global_variables_initializer()
+    assign = variable.assign(13)
+    assign_add = variable.assign_add(13)  # Renamed for clarity
+
+# Execute the operations within a session that uses the defined graph
+with tf.Session(graph=graph) as sess: # Added graph=graph to specify the graph to use.
+    sess.run(initialize)  # Initialize the variable
+    sess.run(assign)      # Assign 13 to the variable
+    sess.run(assign_add)  # Add 13 to the variable
+    print(sess.run(variable))  # Print the final value
+
+
+tensor_a = tf.constant([[1,2]], dtype = tf.int32)
+tensor_b = tf.constant([[3, 4]], dtype = tf.int32)
+tensor_add = tf.add(tensor_a, tensor_b)
+print(tensor_add)
+
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
+x = tf.constant(3.0)
+y = tf.constant(4.0)
+z = x + y
+with tf.Session() as sess:
+    print(sess.run(z))  # Evaluates to 7.0 # This line was also not indented
+
+from sklearn.datasets import load_iris
+iris = load_iris()
+X = iris.data
+y = iris.target
+feature_names = iris.feature_names
+target_names = iris.target_names
+print("Feature names:", feature_names)
+print("Target names:", target_names)
+print("\nFirst 10 rows of X:\n", X[:10])
+
+from sklearn.datasets import load_iris
+iris = load_iris()
+X = iris.data
+y = iris.target
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(
+X, y, test_size = 0.3, random_state = 1
+)
+print(X_train.shape)
+print(X_test.shape)
+print(y_train.shape)
+print(y_test.shape)
+
+#  Python program using Matplotlib 
+# for forming a linear plot
+# importing the necessary packages and modules
+import matplotlib.pyplot as plt
+import numpy as np
+# Prepare the data
+x = np.linspace(0, 10, 100)
+# Plot the data
+plt.plot(x, x, label ='linear')
+# Add a legend
+plt.legend()
+# Show the plot
+plt.show()

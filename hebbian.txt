@@ -1,0 +1,44 @@
+def hebbian_learning(samples):
+    print(f'{"Input":^12} {"Target":^8} {"Weight Changes":^25} {"Weights":^25}')
+    w1, w2, b = 0, 0, 0
+    print(' ' * 47, f'({w1:4},{w2:4},{b:4})')
+    for x1, x2, y in samples:
+        dw1 = x1 * y
+        dw2 = x2 * y
+        db = y
+        w1 += dw1
+        w2 += dw2
+        b += db
+        print(f'({x1:2},{x2:2}) {y:6}     ({dw1:4},{dw2:4},{db:4})       ({w1:4},{w2:4},{b:4})')
+
+# Sample sets
+AND_samples = {
+    'binary_input_binary_output': [
+        [1, 1, 1],
+        [1, 0, 0],
+        [0, 1, 0],
+        [0, 0, 0]
+    ],
+    'binary_input_bipolar_output': [
+        [1, 1, 1],
+        [1, 0, -1],
+        [0, 1, -1],
+        [0, 0, -1]
+    ],
+    'bipolar_input_bipolar_output': [
+        [1, 1, 1],
+        [1, -1, -1],
+        [-1, 1, -1],
+        [-1, -1, -1]
+    ]
+}
+
+# Execution
+print('\nAND with binary input and binary output:')
+hebbian_learning(AND_samples['binary_input_binary_output'])
+
+print('\nAND with binary input and bipolar output:')
+hebbian_learning(AND_samples['binary_input_bipolar_output'])
+
+print('\nAND with bipolar input and bipolar output:')
+hebbian_learning(AND_samples['bipolar_input_bipolar_output'])
